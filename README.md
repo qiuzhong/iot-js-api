@@ -2,15 +2,15 @@
 This suite provides tests for the [OCF JS API][].
 
 ## Build status
-<a href="https://travis-ci.org/gabrielschulhof/iot-js-api-test-suite">
-	<img alt="Build Status" src="https://travis-ci.org/gabrielschulhof/iot-js-api-test-suite.svg?branch=master"></img>
+<a href="https://travis-ci.org/01org/iot-js-api/">
+	<img alt="Build Status" src="https://travis-ci.org/01org/iot-js-api.svg?branch=ocf-new-api"></img>
 </a>
 
 ## Usage:
 
 ```JS
 // Load the test suite
-var ocfTestSuite = require( "iot-js-api-test-suite" );
+var ocfTestSuite = require( "iot-js-api" );
 
 // At your option you may modify the set of default logging callbacks before you run the suite.
 ocfTestSuite.defaultCallbacks.log = ( function( originalLog ) {
@@ -57,4 +57,4 @@ where ```options``` is a hash wherein the following properties are recognized:
 </dl>
 
 
-[OCF JS API]: https://github.com/solettaproject/soletta/blob/v1_beta19/doc/js-spec/oic.md
+[OCF JS API]: https://github.com/01org/iot-js-api/tree/master/api/ocf

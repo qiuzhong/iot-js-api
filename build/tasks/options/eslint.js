@@ -13,7 +13,15 @@
 // limitations under the License.
 
 module.exports = {
-	js: {
-		src: require( "../../js-files" )
+	build: {
+		options: {
+			rules: {
+				"no-restricted-globals": [ 2, "console" ]
+			}
+		},
+		src: [ "Gruntfile.js", "build/**/*.js" ]
+	},
+	tests: {
+		src: [ "tests/**/*.js" ]
 	}
 };
