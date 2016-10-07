@@ -60,6 +60,7 @@ function spawnOne( assert, options ) {
 
 	theChild
 		.on( "exit", function( code, signal ) {
+			code = ( "reportedExitStatus" in theChild ) ? theChild.reportedExitStatus : code;
 			var exitCodeOK = ( code === 0 || code === null ),
 				signalOK = ( signal !== "SIGSEGV" );
 
@@ -97,8 +98,15 @@ function spawnOne( assert, options ) {
 
 			// The child is reporting the number of assertions it will be making. We add our own
 			// two assertions ( 1.) successful exit and 2.) no segfault) to that count.
-			if ( jsonObject.assertionCount ) {
+			if ( "assertionCount" in jsonObject ) {
 				options.reportAssertions( jsonObject.assertionCount + 2 );
+
+			} else if ( "finished" in jsonObject ) {
+				theChild.reportedExitStatus = jsonObject.finished;
+				theChild.kill( "SIGINT" );
+
+			} else if ( jsonObject.info ) {
+				console.log( "\x1b[46;30mi\x1b[0m " + jsonObject.message );
 
 			// The child has requested a teardown.
 			} else if ( jsonObject.teardown ) {
@@ -211,7 +219,7 @@ _.each( options.tests, function( item ) {
 				interpreter: options.interpreter,
 				teardown: function( error, sourceProcess ) {
 					var index,
-						signal = "SIGKILL",
+						signal = "SIGINT",
 
 						// When killing child processes in a loop we have to copy the array
 						// because it may become modified by the incoming notifications that a
@@ -269,6 +277,8 @@ _.each( options.tests, function( item ) {
 		} ) ) );
 	} );
 } );
+
+process.on( "SIGINT", process.exit );
 
 process.on( "exit", function() {
 	var childIndex;
