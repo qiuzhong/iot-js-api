@@ -101,9 +101,11 @@ function spawnOne( assert, options ) {
 			if ( "assertionCount" in jsonObject ) {
 				options.reportAssertions( jsonObject.assertionCount + 2 );
 
+			// The child has requested that it and its peer(s) be killed.
 			} else if ( "finished" in jsonObject ) {
 				theChild.reportedExitStatus = jsonObject.finished;
 				theChild.kill( "SIGINT" );
+				options.teardown( null, theChild );
 
 			} else if ( jsonObject.info ) {
 				console.log( "\x1b[46;30mi\x1b[0m " + jsonObject.message );
@@ -112,10 +114,6 @@ function spawnOne( assert, options ) {
 			} else if ( jsonObject.teardown ) {
 				options.teardown(
 					options.name + " requested teardown: " + jsonObject.message );
-
-			// The child has requested that its peer be killed.
-			} else if ( jsonObject.killPeer ) {
-				options.teardown( null, theChild );
 
 			// The child is reporting that it is ready. Only servers do this.
 			} else if ( jsonObject.ready ) {
