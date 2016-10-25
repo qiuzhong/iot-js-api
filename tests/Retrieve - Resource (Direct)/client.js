@@ -50,7 +50,7 @@ client
 					] } ) );
 				} )
 			.then( function() {
-				return client.retrieve( { deviceId: device.uuid, resourcePath: "/direct" } )
+				return client.retrieve( { deviceId: device.uuid, resourcePath: "/direct" } );
 			} )
 			.then(
 				function( resource ) {

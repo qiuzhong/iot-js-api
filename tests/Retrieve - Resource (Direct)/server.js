@@ -32,7 +32,7 @@ ocf.server
 		}
 	} )
 	.then(
-		function( resource ) {
+		function() {
 			console.log( JSON.stringify( { ready: true } ) );
 		},
 		function( error ) {
