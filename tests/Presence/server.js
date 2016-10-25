@@ -34,7 +34,6 @@ function pushEvent( event ) {
 			],
 			"Client: Events are in the expected sequence"
 		] } ) );
-		console.log( JSON.stringify( { killPeer: true } ) );
 		console.log( JSON.stringify( { finished: 0 } ) );
 	}
 }

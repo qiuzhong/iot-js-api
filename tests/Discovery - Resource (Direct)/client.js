@@ -18,19 +18,21 @@ console.log( JSON.stringify( { assertionCount: 2 } ) );
 
 Promise.all( [
 	new Promise( function( fulfill ) {
-		ocf.client.on( "devicefound", function( device ) {
+		function devicefound( device ) {
 			if ( device.name === "test-device-" + process.argv[ 2 ] ) {
+				ocf.client.removeListener( "devicefound", devicefound );
 				fulfill( device );
 			}
-		} );
+		}
+		ocf.client.on( "devicefound", devicefound );
 	} ),
 	ocf.client
 		.findDevices()
 		.catch( function( error ) {
-			console.log( JSON.stringify( { teardown: true, message:
-				( "" + error ) + "\n" + JSON.stringify( error, null, 4 )
-			} ) );
-			console.log( JSON.stringify( { finished: 1 } ) );
+			console.log( JSON.stringify( { assertion: "ok", arguments: [
+				false, "Failed to start device discovery: " +
+					( "" + error ) + "\n" + JSON.stringify( error, null, 4 )
+			] } ) );
 		} )
 ] ).then( function( results ) {
 	var device = results[ 0 ];
@@ -64,7 +66,6 @@ Promise.all( [
 		console.log( JSON.stringify( { assertion: "ok", arguments: [
 			true, "Client: Resource directly discovered"
 		] } ) );
-		console.log( JSON.stringify( { killPeer: true } ) );
 		console.log( JSON.stringify( { finished: 0 } ) );
 	} );
 } );

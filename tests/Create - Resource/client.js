@@ -88,7 +88,6 @@ function tryDevice( device ) {
 				"Client: After creating the resource, the device contains the target resource " +
 					"as well as the desired one"
 			] } ) );
-			console.log( JSON.stringify( { killPeer: true } ) );
 			console.log( JSON.stringify( { finished: 0 } ) );
 		} )
 		.catch( function( error ) {

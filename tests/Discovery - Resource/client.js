@@ -15,7 +15,6 @@
 var conditionsMet = 0;
 function maybeQuit() {
 	if ( ++conditionsMet === 2 ) {
-		console.log( JSON.stringify( { killPeer: true } ) );
 		console.log( JSON.stringify( { finished: 0 } ) );
 	}
 }

@@ -64,12 +64,7 @@ ocf.server
 						false, "Server: sending response failed" +
 							( "" + error ) + "\n" + JSON.stringify( error, null, 4 )
 					] } ) );
-				} )
-			.then( function() {
-				if ( request.data.disableCount === 2 ) {
-					console.log( JSON.stringify( { finished: 0 } ) );
-				}
-			} );
+				} );
 	} )
 	.register( {
 		resourcePath: "/disable-presence",

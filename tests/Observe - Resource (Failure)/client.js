@@ -25,7 +25,6 @@ function performObservation( resource ) {
 				error.message, "Server responded with error",
 				"Client: Failure to observe resulted in expected error"
 			] } ) );
-			console.log( JSON.stringify( { killPeer: true } ) );
 			console.log( JSON.stringify( { finished: 0 } ) );
 		} )
 		.on( "update", dummyListener );

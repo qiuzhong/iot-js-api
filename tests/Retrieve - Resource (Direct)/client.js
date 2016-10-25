@@ -77,7 +77,6 @@ client
 					] } ) );
 				} )
 			.then( function() {
-				console.log( JSON.stringify( { killPeer: true } ) );
 				console.log( JSON.stringify( { finished: 0 } ) );
 			} );
 	} )

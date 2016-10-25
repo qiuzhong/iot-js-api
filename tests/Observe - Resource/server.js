@@ -94,7 +94,6 @@ server
 										"Server: Timeout was removed by the time the last " +
 											"observer has signed off"
 									] } ) );
-								console.log( JSON.stringify( { killPeer: true } ) );
 								console.log( JSON.stringify( { finished: 0 } ) );
 							}
 						},

@@ -46,7 +46,6 @@ client
 					secure: false
 				}, "Client: Resource found"
 			] } ) );
-			console.log( JSON.stringify( { killPeer: true } ) );
 			console.log( JSON.stringify( { finished: 0 } ) );
 		}
 	} )
